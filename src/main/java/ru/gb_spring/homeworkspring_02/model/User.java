@@ -1,4 +1,4 @@
-package ru.gb.my_first_crud.model;
+package ru.gb_spring.homeworkspring_02.model;
 
 import java.util.Objects;
 
@@ -46,4 +46,5 @@ public class User {
     public int hashCode() {
         return Objects.hash(id, firstName, lastName);
     }
+
 }
