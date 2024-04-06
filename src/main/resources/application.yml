@@ -1,1 +1,11 @@
-spring.application.name=HomeWorkSpring_02
+server:
+  port: 7550
+spring:
+  application:
+    name: HomeWorkSpring_02
+  datasource:
+    url: jdbc:h2:mem:db
+    driverClassName: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization: true
