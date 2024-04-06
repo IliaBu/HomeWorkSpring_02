@@ -1,23 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <title>Users</title>
+    <title>Список пользователей</title>
 </head>
 <body>
+<matrix></matrix>
 <div class="form-block" th:switch="${users}">
-    <h2 th:case="null">No users found!</h2>
+    <h2 th:case="null">Пользователи не найдены!</h2>
     <div th:case="*">
         <h2>Users</h2>
-        <table class="table table-bordered">
+        <table class="table table-bordered" align="center">
             <thead>
             <tr>
                 <th>Id</th>
-                <th>First name</th>
-                <th>Last name</th>
-                <th></th>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Действие</th>
             </tr>
             </thead>
             <tbody>
@@ -26,9 +27,9 @@
                 <td th:text="${user.firstName}"></td>
                 <td th:text="${user.lastName}"></td>
                 <td><a class="btn btn-success" th:href="@{user-update/{id}(id=${user.id})}"
-                       title="Изменить пользователя">E</a>&nbsp;
+                       title="Изменить пользователя">Изменить</a>&nbsp;
                     <a class="btn btn-danger" th:href="@{user-delete/{id}(id=${user.id})}"
-                       title="Удалить пользователя">X</a></td>
+                       title="Удалить пользователя">Удалить</a></td>
             </tr>
             </tbody>
         </table>
@@ -38,5 +39,6 @@
     </p>
 </div>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/matrix.js"></script>
 </body>
 </html>
