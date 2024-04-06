@@ -1,9 +1,9 @@
-package ru.gb_spring.homeworkspring_02.repository;
+package ru.gb_spring.homeworkspring_02.repositories;
 
+import ru.gb_spring.homeworkspring_02.model.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import ru.gb_spring.homeworkspring_02.model.User;
 
 import java.util.List;
 
@@ -36,17 +36,27 @@ public class UserRepository {
     /**
      * Сохранение пользователя в базу
      *
-     * @param user
+     * @param user пользователь
      */
     public void save(User user) {
-        String sql = "INSERT INTO userTable (firstName,lastName) VALUES ( ?, ?)";
+        String sql = "INSERT INTO userTable (firstName,lastName) VALUES (?, ?)";
         jdbc.update(sql, user.getFirstName(), user.getLastName());
     }
 
     /**
-     * Получить пользователя из базы по id
+     * Удаление пользователя по id
      *
-     * @param id
+     * @param id идентификатор пользователя
+     */
+    public void deleteById(int id) {
+        String sql = "DELETE FROM userTable WHERE id=?";
+        jdbc.update(sql, id);
+    }
+
+    /**
+     * Получение пользователя из базы по id
+     *
+     * @param id идентификатор пользователя
      * @return - возвращает пользователя или null если нет записей в базе
      */
     public User getById(int id) {
@@ -64,9 +74,9 @@ public class UserRepository {
     }
 
     /**
-     * Обновить пользователя, ключ - id
+     * Обновление пользователя по id
      *
-     * @param user
+     * @param user пользователь
      */
     public void updateUser(User user) {
         if (isExistUserById(user.getId())) {
@@ -78,11 +88,10 @@ public class UserRepository {
         }
     }
 
-
     /**
      * Проверка существующей записи
      *
-     * @param id
+     * @param id идентификатор пользователя
      * @return true если есть запись с указанным id
      */
     private boolean isExistUserById(int id) {
@@ -90,16 +99,4 @@ public class UserRepository {
         int countRow = jdbc.queryForObject(sql, Integer.class, id);
         return countRow > 0;
     }
-
-    /**
-     * Удаление пользователя по id
-     *
-     * @param id
-     */
-    public void deleteById(int id) {
-        String sql = "DELETE FROM userTable WHERE id=?";
-        jdbc.update(sql, id);
-    }
-
-
 }
